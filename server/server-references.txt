@@ -1,0 +1,49 @@
+Express Middlewares:
+    - https://expressjs.com/en/guide/using-middleware.html
+
+Helmet:
+    - https://geshan.com.np/blog/2021/01/nodejs-express-helmet/
+
+Conventions:
+    - https://www.reddit.com/r/node/comments/n0ce63/which_of_these_express_route_param_naming/
+    - https://swagger.io/specification/
+
+
+
+
+Using Dummy Data:
+    - https://fakestoreapi.com/docs
+    - https://generatedata.com/generator
+
+
+Queries:
+    - https://mongoosejs.com/docs/queries.html
+    - https://www.mongodb.com/docs/manual/reference/operator/query/
+    - https://itnext.io/performance-tips-for-mongodb-mongoose-190732a5d382
+    - https://wiki.openstack.org/wiki/API_Special_Interest_Group/Current_Design/Sorting
+    - https://mongoosejs.com/docs/tutorials/query_casting.html
+    - https://www.semrush.com/blog/url-parameters/
+    - https://hn.algolia.com/api
+
+
+Loggers:
+    - https://www.loggly.com/ultimate-guide/node-logging-basics/
+    - Morgan: https://coralogix.com/log-analytics-blog/morgan-npm-logger-the-complete-guide/
+
+
+***Structure***
+
+Using ES vs Common JS Modules:
+    - https://blog.logrocket.com/how-to-use-ecmascript-modules-with-node-js/
+    - https://blog.logrocket.com/commonjs-vs-es-modules-node-js/
+    ----Troubleshooting---
+        - https://stackoverflow.com/questions/68237294/cant-import-module-in-node-express-js
+        - https://www.kindacode.com/article/node-js-use-async-imports-dynamic-imports-with-es-modules/
+        - https://catchconsole.com/code-example/importingexporting-the-express-router-using-es6-import-export-keywords-and-babel
+
+About importing modules:
+    - https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
+        
+Documentation:
+    - https://gomakethings.com/whats-the-best-way-to-document-javascript/
+    - https://www.allkeysgenerator.com/

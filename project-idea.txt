@@ -1,0 +1,32 @@
+Short summary-
+    LOGING GATE SITE
+
+    Admin specific dashboard listing:
+        - total sales
+        - top products
+        - gains yoy
+        - trends 
+        -summary
+        
+    Product related features
+        - inventory lookup 
+        - location listed
+        - total qty
+        - notes
+        - ability to change product information
+
+
+---POTENTIALLY--- 
+    -reorder inventory
+    -
+    
+
+
+
+Shortcut:
+https://stackoverflow.com/questions/30067767/how-do-i-collapse-sections-of-code-in-visual-studio-code-for-windows
+
+api ideas: https://www.programmableweb.com/news/10-most-popular-products-apis/brief/2021/06/27
+
+https://stackoverflow.com/questions/26357211/rest-url-path-parameter-naming-conventions
+https://www.ibm.com/docs/en/urbancode-release/6.1.1?topic=reference-rest-api-conventions
