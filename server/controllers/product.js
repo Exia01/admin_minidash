@@ -1,24 +1,24 @@
 import Product from './../models/product.js';
+import { StatusCodes } from 'http-status-codes';
 const SUCCESS_MSG = 'Success!';
 const REQUIRED_FIELDS_MSG = 'Required field(s) missing';
 const PRODUCT_NOT_FOUND = 'No product with id';
+import { createCustomError } from '../utils/errors/index.js';
 
 const createProduct = async (req, res, next) => {
   try {
-    // req.body.addedBy = req.user.sub;
-
-    console.log(req.body);
     const { title, price, category, description, ...rest } = req.body;
 
     if (!title || !description) {
-      return res.status(400).json({ msg: REQUIRED_FIELDS_MSG });
+      let err = createCustomError(REQUIRED_FIELDS_MSG, StatusCodes.BAD_REQUEST);
+      throw err;
     }
     // Check if product already exist
-    const currentProduct = await Product.findOne({ title }).lean().exec();
-    if (currentProduct)
-      return res
-        .status(400)
-        .json({ msg: 'Product already in the inventory system' });
+    // const currentProduct = await Product.findOne({ title }).lean().exec();
+    // if (currentProduct)
+    //   return res
+    //     .status(400)
+    //     .json({ msg: 'Product already in the inventory system' });
 
     const newProduct = new Product({
       title,
@@ -29,17 +29,13 @@ const createProduct = async (req, res, next) => {
 
     // Save Product to DB
     const savedProduct = await newProduct.save();
-    return res.status(201).json({ msg: SUCCESS_MSG, product: savedProduct });
+    return res
+      .status(StatusCodes.CREATED)
+      .json({ msg: SUCCESS_MSG, product: savedProduct });
   } catch (err) {
-    let errMsg = err.stack;
-    let msg = 'Could not complete request';
-    res.status(500).json({ msg, errMsg });
+    next(err);
   }
 };
-// const index = asyncWrapper(async (req, res, next) => {
-//   const allProducts = await Product.find({})
-//   res.status(201).json({ allProducts })
-// })
 
 const index = async (req, res, next) => {
   let querySortObj = {};
@@ -56,9 +52,9 @@ const index = async (req, res, next) => {
   //   skip = 0;
   // }
   if (req.query.title) {
+    // if title case insensitivity
     // https://www.mongodb.com/docs/manual/reference/operator/query/
     querySearchObj.title = { $regex: req.query.title, $options: 'i' };
-    // querySortObj.title = req.query.title;
   }
   if (req.query.description) {
     querySearchObj.description = {
@@ -106,6 +102,7 @@ const index = async (req, res, next) => {
     }
   }
 
+  // //if different filters are needed
   const queryObject = {};
   if (req.query.numericFilters) {
     // https://regexr.com/
@@ -149,12 +146,10 @@ const index = async (req, res, next) => {
       //https://stackoverflow.com/questions/45285129/any-difference-between-await-promise-all-and-multiple-awaitk
     ]);
     return res
-      .status(200)
+      .status(StatusCodes.OK)
       .json({ msg: SUCCESS_MSG, products, nbHits: products.length, total });
   } catch (err) {
-    let errMsg = err.stack;
-    let message = 'Could not complete request';
-    res.status(500).json({ msg: message, errMsg });
+    next(err);
   }
 };
 
@@ -170,14 +165,18 @@ const getSingleProduct = async (req, res, next) => {
       .exec();
 
     if (!foundProduct) {
-      return res.status(400).json({ msg: `${PRODUCT_NOT_FOUND} ${id}` });
+      let err = createCustomError(
+        `${PRODUCT_NOT_FOUND} ${id}`,
+        StatusCodes.BAD_REQUEST
+      );
+      throw err;
     }
     // console.log(Product.findById(id).populate('productVariants').exec());
-    return res.status(200).json({ msg: SUCCESS_MSG, product: foundProduct });
+    return res
+      .status(StatusCodes.OK)
+      .json({ msg: SUCCESS_MSG, product: foundProduct });
   } catch (err) {
-    let errMsg = err.stack;
-    let message = 'Could not complete request';
-    res.status(500).json({ msg: message, errMsg });
+    next(err);
   }
 };
 
@@ -185,9 +184,6 @@ const updateProduct = async (req, res, next) => {
   try {
     const id = req.params.product_id;
     const { title, price, category, description, ...rest } = req.body;
-    if (!title || !description) {
-      return res.status(400).json({ msg: REQUIRED_FIELDS_MSG });
-    }
     //could also use "{$set:req.body} to update
     const updatedProduct = await Product.findByIdAndUpdate(
       { _id: id },
@@ -196,27 +192,36 @@ const updateProduct = async (req, res, next) => {
         new: true,
       }
     ).exec();
+    // if (!updatedProduct) {
+    //   return res.status(400).json({ msg: `${PRODUCT_NOT_FOUND} ${id}` });
+    // }  if (!foundProduct) {
     if (!updatedProduct) {
-      return res.status(400).json({ msg: `${PRODUCT_NOT_FOUND} ${id}` });
+      let err = createCustomError(
+        `${PRODUCT_NOT_FOUND} ${id}`,
+        StatusCodes.BAD_REQUEST
+      );
+      throw err;
     }
     let savedProduct = await updatedProduct.save();
 
-    return res.status(200).json({ msg: SUCCESS_MSG, product: savedProduct });
+    return res
+      .status(StatusCodes.OK)
+      .json({ msg: SUCCESS_MSG, product: savedProduct });
   } catch (err) {
-    let errMsg = err.stack;
-    let message = 'Could not complete request';
-    res.status(500).json({ msg: message, errMsg });
+    next(err);
   }
 };
 
 const deleteProduct = async (req, res, next) => {
   try {
-    console.log(req.params);
     const id = req.params.product_id;
     const foundProduct = await Product.findOne({ _id: id }).exec();
-    //could also use "{$set:req.body} to update
     if (!foundProduct) {
-      return res.status(400).json({ msg: `${PRODUCT_NOT_FOUND} ${id}` });
+      let err = createCustomError(
+        `${PRODUCT_NOT_FOUND} ${id}`,
+        StatusCodes.BAD_REQUEST
+      );
+      throw err;
     }
     const removedProduct = await Product.deleteOne(
       { _id: foundProduct._id },
@@ -225,16 +230,15 @@ const deleteProduct = async (req, res, next) => {
       }
     ).exec();
 
-    return res.status(200).json({ msg: SUCCESS_MSG, product: null });
+    return res.status(StatusCodes.OK).json({ msg: SUCCESS_MSG, product: null });
   } catch (err) {
-    let errMsg = err.stack;
-    let message = 'Could not complete request';
-    res.status(500).json({ msg: message, errMsg });
+    next(err);
   }
 };
 
 export { createProduct, index, getSingleProduct, updateProduct, deleteProduct };
 
+// For reference
 // const index = async (req, res, next) => {
 //   let queryObj = {};
 //   let limit = parseInt(req.query.limit); // Make sure to parse the limit to number
