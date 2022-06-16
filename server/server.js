@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 
 import { notFound } from './middleware/not-found.js';
+import mongooseErrorHandlerMiddleware from './middleware/mongoose-error-handler.js';
+import genericErrorHandler from './middleware/generic-error-handler.js';
 
 import 'dotenv/config'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 
@@ -31,6 +33,8 @@ app.use(morgan('dev'));
 app.use(helmet());
 
 app.use('/api/v1', routes);
+app.use(mongooseErrorHandlerMiddleware)
+app.use(genericErrorHandler)
 app.use(notFound);
 
 
