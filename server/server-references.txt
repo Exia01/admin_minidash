@@ -1,5 +1,17 @@
-Express Middlewares:
+Express/Middlewares:
     - https://expressjs.com/en/guide/using-middleware.html
+            ****06/16/22*** Express 4 does not handle async errors v5 will
+        -- Error Handling v4:
+            - https://stackoverflow.com/questions/43356705/node-js-express-error-handling-middleware-with-router
+            - https://scoutapm.com/blog/express-error-handling
+            - https://www.npmjs.com/package/express-async-errors
+            - https://javascript.plainenglish.io/node-express-async-error-handling-e12aa693d84d
+            - https://zellwk.com/blog/async-await-express/
+            - https://stackoverflow.com/questions/51391080/handling-errors-in-express-async-middleware
+            - https://stackoverflow.com/questions/49417580/express-middleware-cannot-trap-errors-thrown-by-async-await-but-why
+    - Errors:
+        - https://stackify.com/node-js-error-handling/
+        - https://futurestud.io/tutorials/node-js-create-your-custom-error
 
 Helmet:
     - https://geshan.com.np/blog/2021/01/nodejs-express-helmet/
@@ -7,8 +19,6 @@ Helmet:
 Conventions:
     - https://www.reddit.com/r/node/comments/n0ce63/which_of_these_express_route_param_naming/
     - https://swagger.io/specification/
-
-
 
 
 Using Dummy Data:
@@ -47,3 +57,4 @@ About importing modules:
 Documentation:
     - https://gomakethings.com/whats-the-best-way-to-document-javascript/
     - https://www.allkeysgenerator.com/
+    - https://gomakethings.com/whats-the-best-way-to-document-javascript/
