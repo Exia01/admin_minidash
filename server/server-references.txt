@@ -21,10 +21,15 @@ Conventions:
     - https://swagger.io/specification/
 
 
+
 Using Dummy Data:
     - https://fakestoreapi.com/docs
     - https://generatedata.com/generator
 
+
+MongoDB/Mongoose conventions:
+    - https://medium.com/@SigniorGratiano/modelling-data-and-advanced-mongoose-175cdbc68bb1
+    - https://fabric.inc/blog/ecommerce-database-design-example/
 
 Queries:
     - https://mongoosejs.com/docs/queries.html
@@ -54,7 +59,8 @@ Using ES vs Common JS Modules:
 About importing modules:
     - https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
         
-Documentation:
+Others:
     - https://gomakethings.com/whats-the-best-way-to-document-javascript/
     - https://www.allkeysgenerator.com/
     - https://gomakethings.com/whats-the-best-way-to-document-javascript/
+
