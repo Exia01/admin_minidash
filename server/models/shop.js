@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 // const Schema = mongoose.Schema;
 const { Schema } = mongoose;
 
-const ProductSchema = new Schema(
+const ShopSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a shop name'],
       unique: true,
       trim: true,
     },
@@ -40,6 +40,6 @@ const ProductSchema = new Schema(
   }
 );
 
-const Product = mongoose.model('Product', ProductSchema);
+const Product = mongoose.model('Product', ShopSchema);
 
 export default Product;
