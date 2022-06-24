@@ -28,6 +28,7 @@ Using Dummy Data:
 
 
 MongoDB/Mongoose conventions:
+    - https://dev.to/swyx/4-things-i-learned-from-mastering-mongoose-js-25e#4-principle-of-least-cardinality
     - https://medium.com/@SigniorGratiano/modelling-data-and-advanced-mongoose-175cdbc68bb1
     - https://fabric.inc/blog/ecommerce-database-design-example/
 
@@ -63,4 +64,5 @@ Others:
     - https://gomakethings.com/whats-the-best-way-to-document-javascript/
     - https://www.allkeysgenerator.com/
     - https://gomakethings.com/whats-the-best-way-to-document-javascript/
+    - https://javascript.info/class
 
