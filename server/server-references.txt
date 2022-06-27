@@ -40,6 +40,7 @@ Queries:
     - https://mongoosejs.com/docs/tutorials/query_casting.html
     - https://www.semrush.com/blog/url-parameters/
     - https://hn.algolia.com/api
+    - https://medium.com/cameoeng/mongodb-lookups-and-populates-an-unexpected-journey-940e08e36a94
 
 
 Loggers:
