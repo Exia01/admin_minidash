@@ -26,7 +26,7 @@ const ProductSchema = new Schema(
       required: [true, 'Please provide a product description'],
     },
 
-    categories: { type: Schema.Types.ObjectId, ref: 'Category' },
+    category: { type: Schema.Types.ObjectId, ref: 'Category' },
     // category: {
     //   type: String,
     //   //could also make it several
