@@ -1,4 +1,5 @@
 import Product from './../models/product.js';
+import Category from './../models/category.js';
 import { StatusCodes } from 'http-status-codes';
 const SUCCESS_MSG = 'Success!';
 const REQUIRED_FIELDS_MSG = 'Required field(s) missing';
@@ -7,25 +8,27 @@ import { createCustomError } from '../utils/errors/index.js';
 
 const createProduct = async (req, res, next) => {
   try {
-    const { title, price, category, description, ...rest } = req.body;
+    const { name, price, category, description, ...rest } = req.body;
 
-    if (!title || !description) {
+    if (!name || !description) {
       let err = createCustomError(REQUIRED_FIELDS_MSG, StatusCodes.BAD_REQUEST);
       throw err;
     }
     // Check if product already exist
-    // const currentProduct = await Product.findOne({ title }).lean().exec();
+    // const currentProduct = await Product.findOne({ name }).lean().exec();
     // if (currentProduct)
     //   return res
     //     .status(400)
     //     .json({ msg: 'Product already in the inventory system' });
 
     const newProduct = new Product({
-      title,
+      name,
       price,
       description,
+      category,
       ...rest,
     });
+    console.log(newProduct);
 
     // Save Product to DB
     const savedProduct = await newProduct.save();
@@ -37,11 +40,14 @@ const createProduct = async (req, res, next) => {
   }
 };
 
+// https://github.com/maryamaljanabi/bestbags-nodejs-ecommerce/blob/master/routes/products.js
+
 const index = async (req, res, next) => {
   let querySortObj = {};
   let querySearchObj = {};
   let page = parseInt(req.query.page) || 1;
   let limit = parseInt(req.query.limit); // Make sure to parse the limit to number
+
   if (!limit) {
     limit = 10;
   }
@@ -51,10 +57,11 @@ const index = async (req, res, next) => {
   // if (!skip) {
   //   skip = 0;
   // }
-  if (req.query.title) {
+
+  if (req.query.name) {
     // if title case insensitivity
     // https://www.mongodb.com/docs/manual/reference/operator/query/
-    querySearchObj.title = { $regex: req.query.title, $options: 'i' };
+    querySearchObj.name = { $regex: req.query.name, $options: 'i' };
   }
   if (req.query.description) {
     querySearchObj.description = {
@@ -62,6 +69,7 @@ const index = async (req, res, next) => {
       $options: 'i',
     };
   }
+
   if (req.query.min_price) {
     let tempPriceObj = querySearchObj.price ? querySearchObj.price : null;
     querySearchObj.price = {
@@ -69,6 +77,7 @@ const index = async (req, res, next) => {
       $gt: parseInt(req.query.min_price),
     };
   }
+
   if (req.query.max_price) {
     let tempPriceObj = querySearchObj.price ? querySearchObj.price : null;
     querySearchObj.price = {
@@ -76,14 +85,7 @@ const index = async (req, res, next) => {
       $lt: parseInt(req.query.max_price),
     };
   }
-  if (req.query.category) {
-    querySearchObj.category = req.query.category;
-  }
-  const pendingProducts = Product.find(querySearchObj).lean();
-  if (req.query.fields) {
-    let fields = req.query.fields.trim().split(',').join(' ');
-    pendingProducts.select(fields);
-  }
+
   if (req.query.sort) {
     const sortString = req.query.sort.trim();
     switch (sortString) {
@@ -93,61 +95,51 @@ const index = async (req, res, next) => {
       case 'price_high':
         querySortObj.price = -1;
         break;
-      case 'price_high':
-        querySortObj.price = -1;
-        break;
       default:
-        querySortObj.title = 1;
+        querySortObj.createdAt = -1;
         break;
     }
   }
 
-  // //if different filters are needed
-  const queryObject = {};
-  if (req.query.numericFilters) {
-    // https://regexr.com/
-    // numericFilters=price>40,inventoryCount>50
-    const operatorMap = {
-      '>': '$gt',
-      '>=': '$gte',
-      '=': '$eq',
-      '<': '$lt',
-      '<=': '$lte',
-    };
-    const regEx = /\b(<|>|>=|=|<|<=)\b/g;
-    // replace the symbols for the equivalent val
-    let filters = numericFilters.replace(
-      regEx,
-      (match) => `-${operatorMap[match]}-`
-    );
-    const options = ['price', 'inventoryCount'];
-    filters = filters.split(',').forEach((item) => {
-      const [field, operator, value] = item.split('-');
-      {
-        price;
-      }
-      if (options.includes(field)) {
-        queryObject[field] = { [operator]: Number(value) };
-        // // Object.price{$lt:40}
-      }
+  if (req.query.category) {
+    // could denormalize for ease of use:https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-1
+    const foundCategory = await Category.findOne({
+      name: { $regex: req.query.category, $options: 'i' },
     });
+    if (req.query.category && foundCategory) {
+      querySearchObj.category = foundCategory._id;
+    }
+  }
+  console.log(querySearchObj);
+  let pendingProducts = Product.find(querySearchObj)
+    .populate('category')
+    .lean();
+
+  if (req.query.fields) {
+    let fields = req.query.fields.trim().split(',').join(' ');
+    pendingProducts.select(fields);
   }
 
-  //could skip sort by checking keys on obj
   pendingProducts.sort(querySortObj);
+
   try {
     const [products, total] = await Promise.all([
       pendingProducts
         .skip(skip) // Use this to sort documents by newest first // Always apply 'skip' before 'limit'
         .limit(limit) // This is your 'page size'
-        // .populate('variants')
+        // .populate({ path: 'categories' }) //in case of virtual categories
+        // .populate('categories')
         .exec(),
       Product.countDocuments(),
       //https://stackoverflow.com/questions/45285129/any-difference-between-await-promise-all-and-multiple-awaitk
     ]);
-    return res
-      .status(StatusCodes.OK)
-      .json({ msg: SUCCESS_MSG, products, nbHits: products.length, total });
+
+    return res.status(StatusCodes.OK).json({
+      msg: SUCCESS_MSG,
+      products,
+      nbHits: products.length,
+      total,
+    });
   } catch (err) {
     next(err);
   }
@@ -161,9 +153,10 @@ const getSingleProduct = async (req, res, next) => {
     // const {product_id:product_id} = req.params
     const foundProduct = await Product.findById(id)
       .lean()
-      // .populate('variants')
+      .populate('category', 'name')
       .exec();
 
+    console.log(foundProduct.category);
     if (!foundProduct) {
       let err = createCustomError(
         `${PRODUCT_NOT_FOUND} ${id}`,
@@ -183,7 +176,9 @@ const getSingleProduct = async (req, res, next) => {
 const updateProduct = async (req, res, next) => {
   try {
     const id = req.params.product_id;
-    const { title, price, category, description, ...rest } = req.body;
+
+    const allowedUpdates = ['name', 'description', 'category', 'price'];
+    const { name, price, category, description, ...rest } = req.body;
     //could also use "{$set:req.body} to update
     const updatedProduct = await Product.findByIdAndUpdate(
       { _id: id },
@@ -260,6 +255,37 @@ export { createProduct, index, getSingleProduct, updateProduct, deleteProduct };
 //   }
 //   if (req.query.sortBy) {
 //   }
+
+// // //if different filters are needed
+// const queryObject = {};
+// if (req.query.numericFilters) {
+//   // https://regexr.com/
+//   // numericFilters=price>40,inventoryCount>50
+//   const operatorMap = {
+//     '>': '$gt',
+//     '>=': '$gte',
+//     '=': '$eq',
+//     '<': '$lt',
+//     '<=': '$lte',
+//   };
+//   const regEx = /\b(<|>|>=|=|<|<=)\b/g;
+//   // replace the symbols for the equivalent val
+//   let filters = numericFilters.replace(
+//     regEx,
+//     (match) => `-${operatorMap[match]}-`
+//   );
+//   const options = ['price', 'inventoryCount'];
+//   filters = filters.split(',').forEach((item) => {
+//     const [field, operator, value] = item.split('-');
+//     {
+//       price;
+//     }
+//     if (options.includes(field)) {
+//       queryObject[field] = { [operator]: Number(value) };
+//       // // Object.price{$lt:40}
+//     }
+//   });
+// }
 
 //   try {
 //     const [products, total] = await Promise.all([
