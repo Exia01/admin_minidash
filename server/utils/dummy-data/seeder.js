@@ -1,15 +1,12 @@
 /* Seeder Script */
-import { MongoClient } from 'mongodb'
+import { MongoClient } from 'mongodb';
 
- // importing environmental variables
- import { config } from "dotenv";
- config()
-     
-
+// importing environmental variables
+import { config } from 'dotenv';
+config();
 
 import { productData } from './productSeedData.js';
 import { shopData } from './shopSeedData.js';
-
 
 async function seedProductsCollections() {
   const uri = process.env.MONGO_URI;
@@ -17,7 +14,9 @@ async function seedProductsCollections() {
   try {
     await client.connect();
     console.log('Connected successfully to server');
-    const collection = await client.db('sample_analytics').collection('products');
+    const collection = await client
+      .db('sample_analytics')
+      .collection('products');
 
     const [dropConfirmation, insertData] = await Promise.all([
       collection.drop(),
@@ -36,10 +35,8 @@ async function seedProductsCollections() {
     console.log(err);
     process.exit(-1);
   }
-
 }
 seedProductsCollections();
-
 
 async function seedShopsCollections() {
   const uri = process.env.MONGO_URI;
@@ -50,8 +47,8 @@ async function seedShopsCollections() {
     const collection = await client.db('sample_analytics').collection('shops');
 
     const [dropConfirmation, insertData] = await Promise.all([
-      // collection.drop(),
-      collection.insertMany(shopData),
+      collection.drop(),
+      collection.insertMany(categoryData),
     ]);
     // const insertedData = await collection.insertMany(shopData);
     // The drop() command destroys all data from a collection.
@@ -76,3 +73,4 @@ async function seedShopsCollections() {
   //   });
 }
 // seedShopsCollections()
+
