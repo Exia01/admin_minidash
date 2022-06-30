@@ -1,10 +1,10 @@
 import express from 'express';
 import {
   createCategory,
-  // index,
-  // getSingleCategory,
-  // updateCategory,
-  // deleteCategory,
+  index,
+  getSingleCategory,
+  updateCategory,
+  deleteCategory,
 } from '../../controllers/category.js';
 
 const router = express.Router();
