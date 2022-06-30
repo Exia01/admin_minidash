@@ -15,6 +15,5 @@ router.get('/:category_id', getSingleCategory);
 router.patch('/:category_id', updateCategory);
 router.delete('/:category_id', deleteCategory);
 
-router.get('/');
 
 export default router;
