@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "seed": "node ./utils/dummy-data/seeder.js",
-    "seedCategory": "node ./utils/dummy-data/categorySeeder.js"
+    "seedCategories": "node ./utils/dummy-data/categorySeeder.js",
+    "seedShops": "node ./utils/dummy-data/shopSeeder.js"
   },
   "author": "Jose",
   "license": "ISC",
