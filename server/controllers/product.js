@@ -15,11 +15,11 @@ const createProduct = async (req, res, next) => {
       throw err;
     }
     // Check if product already exist
-    // const currentProduct = await Product.findOne({ name }).lean().exec();
-    // if (currentProduct)
-    //   return res
-    //     .status(400)
-    //     .json({ msg: 'Product already in the inventory system' });
+    const currentProduct = await Product.findOne({ name }).lean().exec();
+    if (currentProduct)
+      return res
+        .status(400)
+        .json({ msg: 'Product already in the inventory system' });
 
     const newProduct = new Product({
       name,
