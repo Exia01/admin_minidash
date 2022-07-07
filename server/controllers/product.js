@@ -100,8 +100,11 @@ const index = async (req, res, next) => {
         break;
     }
   }
-
   if (req.query.category) {
+    querySearchObj.category = req.query.category;
+  }
+  // if using ref instead of embedded
+  /*if (req.query.category) {
     // could denormalize for ease of use:https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-1
     const foundCategory = await Category.findOne({
       name: { $regex: req.query.category, $options: 'i' },
@@ -111,8 +114,9 @@ const index = async (req, res, next) => {
     }
   }
   console.log(querySearchObj);
-  let pendingProducts = Product.find(querySearchObj)
-    .populate('category')
+  */
+  let pendingProducts =
+    Product.find(querySearchObj)
     .lean();
 
   if (req.query.fields) {
