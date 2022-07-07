@@ -29,7 +29,7 @@ const ShopSchema = new Schema(
         '{VALUE} is not a valid phone number',
       ],
       // message: '{VALUE} is not a valid phone number',
-      required: [true, 'Please provide phone number'],
+      // required: [true, 'Please provide phone number'],
     },
     ext:{
       type:String
