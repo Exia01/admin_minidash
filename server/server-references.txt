@@ -21,8 +21,7 @@ Conventions:
     - https://swagger.io/specification/
 
 
-
-Using Dummy Data:
+Dummy Data Generator:
     - https://fakestoreapi.com/docs
     - https://generatedata.com/generator
 
@@ -32,13 +31,18 @@ MongoDB/Mongoose conventions:
     - https://medium.com/@SigniorGratiano/modelling-data-and-advanced-mongoose-175cdbc68bb1
     - https://fabric.inc/blog/ecommerce-database-design-example/
 
+    - Data modeling:    
+        --- https://www.youtube.com/watch?v=3GHZd0zv170&list=TLPQMDcwNzIwMjKK6larSgQIuQ&index=14
+        --- https://shanu95.medium.com/schema-patterns-mongodb-part-1-16564f1198dc
+        --- https://www.leonpahole.com/blog/mongodb-data-modelling-notes
+
     Rules:
         Rule 1: embed unless there is a compelling reason not to
         Rule 2: avoid JOINS if they can be avoided
         Rule 3: array should never grow without bound
         Rule 4: an object should not be embedded if it needs to be accessed individually
 
-Queries:
+How to - queries:
     - https://mongoosejs.com/docs/queries.html
     - https://www.mongodb.com/docs/manual/reference/operator/query/
     - https://itnext.io/performance-tips-for-mongodb-mongoose-190732a5d382
