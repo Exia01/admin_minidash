@@ -8,7 +8,11 @@ const mongooseErrorHandlerMiddleware = (err, req, res, next) => {
   };
 
   if (err.name === 'ValidationError') {
+    // console.log(err.errors);
     //loop through the errors for validation
+    // customError.msg = Object.values(err.errors)
+    //   .map((item) => item.message)
+    //   .join(',');
     customError.msg = Object.values(err.errors)
       .map((item) => item.message)
       .join(',');
@@ -24,8 +28,10 @@ const mongooseErrorHandlerMiddleware = (err, req, res, next) => {
   if (err.name === 'CastError') {
     customError.msg = `No item found with id : ${err.value}`;
     customError.statusCode = StatusCodes.BAD_REQUEST;
+    if(err.kind = "date"){
+      customError.msg = `Invalid date format`;
+    }
   }
-
   if (
     customError.hasOwnProperty('msg') &&
     customError.hasOwnProperty('statusCode')
