@@ -1,10 +1,26 @@
+OBJECTIVES 
+
+Allow admin to view and manage product inventory, manage shops, view their total sales, top products sold and yoy comparison. 
+
+store the shops and the checks they have been paid
+store the shops and their total sales by period
+store the shops and store their monthly sales by period
+
+
 ### Products
-    - categories
 
-###Sales 
-    -Reports?
-    
 
+###Reports
+    -Total Shop Sales 
+        -Model :shopSales ^salesFigure ^shopID ^period ^Month ^Quarter
+
+    -Top selling Shop
+        -Model :totalSales ^salesFigure 
+        https://stackoverflow.com/questions/25557966/query-and-sum-all-with-mongoose
+
+        https://stackoverflow.com/questions/31437026/mongoose-aggregation-sum-of-rows-in-sub-document
+
+Category: Men's clothing, women's clothing, jewelry, electronics
 *** DONE ***
 
 
