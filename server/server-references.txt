@@ -32,6 +32,12 @@ MongoDB/Mongoose conventions:
     - https://medium.com/@SigniorGratiano/modelling-data-and-advanced-mongoose-175cdbc68bb1
     - https://fabric.inc/blog/ecommerce-database-design-example/
 
+    Rules:
+        Rule 1: embed unless there is a compelling reason not to
+        Rule 2: avoid JOINS if they can be avoided
+        Rule 3: array should never grow without bound
+        Rule 4: an object should not be embedded if it needs to be accessed individually
+
 Queries:
     - https://mongoosejs.com/docs/queries.html
     - https://www.mongodb.com/docs/manual/reference/operator/query/
@@ -67,3 +73,7 @@ Others:
     - https://gomakethings.com/whats-the-best-way-to-document-javascript/
     - https://javascript.info/class
 
+Validations:
+    - Check for valid date 
+      https://masteringjs.io/tutorials/fundamentals/typeof-date#:~:text=You%20can%20use%20the%20!,whether%20a%20date%20is%20valid.&text=If%20x%20is%20a%20Date,x)%20is%20equivalent%20to%20Number.
+        
