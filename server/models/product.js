@@ -26,12 +26,12 @@ const ProductSchema = new Schema(
       required: [true, 'Please provide a product description'],
     },
 
-    category: { type: Schema.Types.ObjectId, ref: 'Category' },
-    // category: {
-    //   type: String,
-    //   //could also make it several
-    //   //type:Array
-    // },
+    // category: { type: Schema.Types.ObjectId, ref: 'Category' },
+    category: {
+      type: String,
+      //could also make it several
+      //type:Array
+    },
     img: {
       type: String,
       default: 'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
@@ -50,6 +50,9 @@ const ProductSchema = new Schema(
     //   type: Boolean,
     //   default: true,
     // },
+    schemaVer:{
+      type:Number
+    }
   },
 
   {
