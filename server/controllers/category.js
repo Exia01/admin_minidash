@@ -20,10 +20,10 @@ const createCategory = async (req, res, next) => {
     });
 
     // Save Category to DB
-    const saveCategory = await newCategory.save();
+    const savedCategory = await newCategory.save();
     return res
       .status(StatusCodes.CREATED)
-      .json({ msg: SUCCESS_MSG, category: saveCategory });
+      .json({ msg: SUCCESS_MSG, category: savedCategory });
   } catch (err) {
     next(err);
   }
