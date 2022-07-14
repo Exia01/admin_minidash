@@ -36,6 +36,6 @@ const SaleEntrySchema = new Schema(
 );
 
 
-const SaleEntry = mongoose.model('SalesEntry', SaleEntrySchema);
+const SaleEntry = mongoose.model('salesEntries', SaleEntrySchema);
 
 export default SaleEntry;
