@@ -11,5 +11,8 @@ class CustomAPIError extends Error {
 const createCustomError = (msg, statusCode) => {
   return new CustomAPIError(msg, statusCode);
 };
+const createReportBuilderError = (msg, statusCode) => {
+  return CustomAPIError(msg, statusCode);
+};
 
 export { CustomAPIError, createCustomError };
