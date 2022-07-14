@@ -9,7 +9,8 @@
     "start": "node server.js",
     "seed": "node ./utils/dummy-data/seeder.js",
     "seedCategories": "node ./utils/dummy-data/categorySeeder.js",
-    "seedShops": "node ./utils/dummy-data/shopSeeder.js"
+    "seedShops": "node ./utils/dummy-data/shopSeeder.js",
+    "seedSales": "node ./utils/dummy-data/salesEntriesSeeder.js"
   },
   "author": "Jose",
   "license": "ISC",
