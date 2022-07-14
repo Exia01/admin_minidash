@@ -1,0 +1,88 @@
+import { ObjectId } from 'mongodb';
+
+export const salesSeedData2021 = [
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 595339,
+    yearPeriod: '2021',
+    quarter: 'Q1',
+    month: '1',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 163708,
+    yearPeriod: '2021',
+    quarter: 'Q1',
+    month: '2',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 625558,
+    yearPeriod: '2021',
+    quarter: 'Q1',
+    month: '3',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 789877,
+    yearPeriod: '2021',
+    quarter: 'Q2',
+    month: '4',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 328947,
+    yearPeriod: '2021',
+    quarter: 'Q2',
+    month: '5',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 657714,
+    yearPeriod: '2021',
+    quarter: 'Q2',
+    month: '6',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 230018,
+    yearPeriod: '2021',
+    quarter: 'Q3',
+    month: '7',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 127219,
+    yearPeriod: '2021',
+    quarter: 'Q3',
+    month: '8',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 895186,
+    yearPeriod: '2021',
+    quarter: 'Q3',
+    month: '9',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 486404,
+    yearPeriod: '2021',
+    quarter: 'Q4',
+    month: '10',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 721141,
+    yearPeriod: '2021',
+    quarter: 'Q4',
+    month: '11',
+  },
+  {
+    shop: ObjectId('62c5ca5484b09334967759c4'),
+    total: 916698,
+    yearPeriod: '2021',
+    quarter: 'Q4',
+    month: '12',
+  },
+];
