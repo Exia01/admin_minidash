@@ -5,7 +5,9 @@ Allow admin to view and manage product inventory, manage shops, view their total
 store the shops and the checks they have been paid
 store the shops and their total sales by period
 store the shops and store their monthly sales by period
-
+https://www.clicdata.com/wp-content/uploads/2019/06/example-dashboard-027-1024x710.png
+https://www.boldbi.com/wp-content/uploads/2021/01/revenue-analysis-dashboard-2.svg
+https://www.google.com/search?q=sales+dashboard+examples&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjuno6hp_H4AhU8EFkFHbLaBqEQ_AUoAXoECAEQAw&biw=2560&bih=1301&dpr=1#imgrc=To7fhIXBHQkIwM
 
 ### Products
 
