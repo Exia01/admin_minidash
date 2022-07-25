@@ -50,9 +50,13 @@ const ProductSchema = new Schema(
     //   type: Boolean,
     //   default: true,
     // },
-    schemaVer:{
-      type:Number
-    }
+    unitsSold: {
+      type: Number,
+      default: 0,
+    },
+    schemaVer: {
+      type: Number,
+    },
   },
 
   {
