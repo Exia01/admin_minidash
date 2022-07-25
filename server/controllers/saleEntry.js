@@ -70,6 +70,9 @@ const index = async (req, res, next) => {
   if (req.query.month) {
     querySearchObj.month = req.query.month;
   }
+  if (req.query.shop) {
+    querySearchObj.shop = req.query.shop;
+  }
 
   if (req.query.sort) {
     const sortString = req.query.sort.trim();
