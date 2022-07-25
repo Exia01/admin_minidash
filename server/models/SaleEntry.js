@@ -9,8 +9,12 @@ const SaleEntrySchema = new Schema(
       type: Number,
       required: [true, 'Please provide total for sale entry'],
     },
+    fullDate: {
+      type: Date,
+      default: new Date(),
+    },
     yearPeriod: {
-      type: String,
+      type: Number,
       required: [true, 'Please provide a year figure'],
     },
     quarter: {
@@ -18,7 +22,7 @@ const SaleEntrySchema = new Schema(
       required: [true, 'Please provide a quarter period'],
     },
     month: {
-      type: String,
+      type: Number,
       required: [true, 'Please provide a month  '],
     },
     schemaVer: {
@@ -28,6 +32,7 @@ const SaleEntrySchema = new Schema(
 
   {
     timestamps: true,
+    collection: 'salesEntries',
   }
   // {
   //   toJSON: { virtuals: true }, // So `res.json()` and other `JSON.stringify()` functions include virtuals
@@ -35,7 +40,11 @@ const SaleEntrySchema = new Schema(
   // }
 );
 
-
 const SaleEntry = mongoose.model('salesEntries', SaleEntrySchema);
+
+//Using regular function to scope 'this'
+SaleEntrySchema.pre('save', async function () {
+  console.log(this.fullDate, 'Inside the schema pre-save');
+});
 
 export default SaleEntry;
