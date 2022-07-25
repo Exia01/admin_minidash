@@ -51,6 +51,9 @@ How to - queries:
     - https://www.semrush.com/blog/url-parameters/
     - https://hn.algolia.com/api
     - https://medium.com/cameoeng/mongodb-lookups-and-populates-an-unexpected-journey-940e08e36a94
+    ---AGGREGATION---
+        - https://stackoverflow.com/questions/22932364/mongodb-group-values-by-multiple-fields
+        - https://masteringjs.io/tutorials/mongoose/aggregate
 
 
 Loggers:
