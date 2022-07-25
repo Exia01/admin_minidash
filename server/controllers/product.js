@@ -95,6 +95,8 @@ const index = async (req, res, next) => {
       case 'price_high':
         querySortObj.price = -1;
         break;
+      case 'units_sold':
+        querySortObj.unitsSold = -1;
       default:
         querySortObj.createdAt = -1;
         break;
@@ -115,9 +117,7 @@ const index = async (req, res, next) => {
   }
   console.log(querySearchObj);
   */
-  let pendingProducts =
-    Product.find(querySearchObj)
-    .lean();
+  let pendingProducts = Product.find(querySearchObj).lean();
 
   if (req.query.fields) {
     let fields = req.query.fields.trim().split(',').join(' ');
@@ -160,7 +160,6 @@ const getSingleProduct = async (req, res, next) => {
       .populate('category', 'name')
       .exec();
 
-    console.log(foundProduct.category);
     if (!foundProduct) {
       let err = createCustomError(
         `${PRODUCT_NOT_FOUND} ${id}`,
