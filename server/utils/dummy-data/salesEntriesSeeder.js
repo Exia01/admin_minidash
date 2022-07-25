@@ -22,7 +22,7 @@ async function seedSalesEntriesCollections() {
     console.log('Connected successfully to server');
     const collection = await client
       .db('sample_analytics')
-      .collection('salesEntries');
+      .collection('salesentries');
 
     const [dropConfirmation, insertData] = await Promise.all([
       collection.drop(),
