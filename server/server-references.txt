@@ -13,6 +13,9 @@ Express/Middlewares:
         - https://stackify.com/node-js-error-handling/
         - https://futurestud.io/tutorials/node-js-create-your-custom-error
 
+Cookie-parser:
+    -https://dev.to/franciscomendes10866/using-cookies-with-jwt-in-node-js-8fn
+
 Helmet:
     - https://geshan.com.np/blog/2021/01/nodejs-express-helmet/
 
@@ -83,4 +86,6 @@ Others:
 Validations:
     - Check for valid date 
       https://masteringjs.io/tutorials/fundamentals/typeof-date#:~:text=You%20can%20use%20the%20!,whether%20a%20date%20is%20valid.&text=If%20x%20is%20a%20Date,x)%20is%20equivalent%20to%20Number.
+    - Checking for valid email:
+        https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
         
