@@ -6,6 +6,7 @@ import categoryRouter from './category.js';
 import shopRouter from './shop.js';
 import saleEntryRouter from './saleEntry.js';
 import reportRouter from './reports.js';
+import authRouter from './auth.js';
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.use('/category', categoryRouter);
 router.use('/shop', shopRouter);
 router.use('/sale-entry', saleEntryRouter);
 router.use('/report', reportRouter);
+router.use('/auth', authRouter);
 // router.use('/shop', shopRouter);
 
 export default router;
