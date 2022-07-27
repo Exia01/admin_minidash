@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 
 import { notFound } from './middleware/not-found.js';
 import mongooseErrorHandlerMiddleware from './middleware/mongoose-error-handler.js';
@@ -31,12 +32,12 @@ app.use(express.json()); //Used to parse JSON bodies
 app.use(morgan('dev'));
 // middleware for setting http headers
 app.use(helmet());
+app.use(cookieParser());
 
 app.use('/api/v1', routes);
-app.use(mongooseErrorHandlerMiddleware)
-app.use(genericErrorHandler)
+app.use(mongooseErrorHandlerMiddleware);
+app.use(genericErrorHandler);
 app.use(notFound);
-
 
 //Example of how to import modules on express
 // export function add(a, b) {
