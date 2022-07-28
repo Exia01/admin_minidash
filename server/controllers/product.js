@@ -18,7 +18,7 @@ const createProduct = async (req, res, next) => {
     const currentProduct = await Product.findOne({ name }).lean().exec();
     if (currentProduct)
       return res
-        .status(400)
+        .status(StatusCodes.BAD_REQUEST)
         .json({ msg: 'Product already in the inventory system' });
 
     const newProduct = new Product({
@@ -191,7 +191,7 @@ const updateProduct = async (req, res, next) => {
       }
     ).exec();
     // if (!updatedProduct) {
-    //   return res.status(400).json({ msg: `${PRODUCT_NOT_FOUND} ${id}` });
+    //   return res.status(StatusCodes.BAD_REQUEST).json({ msg: `${PRODUCT_NOT_FOUND} ${id}` });
     // }  if (!foundProduct) {
     if (!updatedProduct) {
       let err = createCustomError(
