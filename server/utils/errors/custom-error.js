@@ -15,4 +15,5 @@ const createReportBuilderError = (msg, statusCode) => {
   return CustomAPIError(msg, statusCode);
 };
 
+
 export { CustomAPIError, createCustomError };
