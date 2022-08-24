@@ -9,8 +9,7 @@ const createToken = (user) => {
   return jwt.sign(
     {
       sub: user._id, //subject || known as id
-      //   .username || '',
-      user: user,
+      // user: user,
       email: user.email,
       role: user.role,
       iss: '', //issuer
@@ -28,5 +27,10 @@ const verifyToken = (token) => {
 const verifyPassword = (passwordAttempt, hashedPassword) => {
   return bcrypt.compare(passwordAttempt, hashedPassword);
 };
-
-export { createToken, verifyToken, verifyPassword };
+async function hashPassword(stringWord) {
+  const saltRounds = 10;
+  const generatedSalt = await bcrypt.genSalt(saltRounds);
+  const hashedPassword = await bcrypt.hash(stringWord, generatedSalt);
+  return hashedPassword;
+}
+export { createToken, verifyToken, verifyPassword, hashPassword };
