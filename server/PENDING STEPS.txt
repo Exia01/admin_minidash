@@ -22,10 +22,7 @@ https://www.google.com/search?q=sales+dashboard+examples&source=lnms&tbm=isch&sa
 
         https://stackoverflow.com/questions/31437026/mongoose-aggregation-sum-of-rows-in-sub-document
 
-Category: Men's clothing, women's clothing, jewelry, electronics
 *** DONE ***
 
 
 https://medium.com/geekculture/how-i-built-an-e-commerce-api-with-nodejs-express-and-mongodb-part-4-318e3f494611
-
-logic for adding products?
