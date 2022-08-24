@@ -45,6 +45,7 @@ async function hashPassword(stringWord) {
   return hashedPassword;
 }
 UserSchema.pre('save', async function () {
+  //could probably eliminate the async and await block here and just do a try-catch?
   const hashedPass = await hashPassword(this.password);
   this.password = hashedPass;
 });
