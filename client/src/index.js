@@ -4,10 +4,52 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Libraries
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+// MUI
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+// Pages
+import Login from './pages/Login';
+import Register from './pages/Register';
+
+const currentTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+//Router
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    //handles 404s
+    errorElement: <h1>Error Page!</h1>,
+    // children: [
+    //   {
+    //     path: 'contacts/:contactId',
+    //     element: <Contact />,
+    //   },
+    // ],
+  },
+  {
+    path: 'Login',
+    element: <Login />,
+  },
+  {
+    path: 'Register',
+    element: <Register />,
+  },
+]);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={currentTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
