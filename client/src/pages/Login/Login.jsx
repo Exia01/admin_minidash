@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 // MUI imports
 import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
@@ -12,7 +14,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import { Divider } from '@mui/material';
 // logo import
-import logo from '../assets/logos/logo.png';
+import logo from '../../../src/assets/logos/logo.png';
 
 const Login = () => {
   return (
@@ -32,7 +34,7 @@ const Login = () => {
         paddingX={3}
         // sx={{ height: '120px' }}
       >
-        <a href='/'>
+        <Link to='/'>
           <Box
             component='img'
             sx={{
@@ -41,7 +43,7 @@ const Login = () => {
             alt='Website Logo'
             src={logo}
           />
-        </a>
+        </Link>
       </Grid>
       <Grid container xs={12}>
         <Grid
@@ -76,7 +78,7 @@ const Login = () => {
                   <Typography variant='h4' component='h1'>
                     Login
                   </Typography>
-                  <a href='/'>Dont Have an account?</a>
+                  <Link to='/register'>Don't Have an account?</Link>
                 </Grid>
                 {/* email */}
                 <Grid xs={12}>
